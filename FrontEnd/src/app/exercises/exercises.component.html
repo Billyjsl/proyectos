@@ -1,0 +1,32 @@
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle
+    *ngFor="let data of data">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Ejercicios: {{data.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        <div>Objetivo: {{data.target}}</div>
+      </mat-panel-description> 
+    </mat-expansion-panel-header>
+    <div class="image-input-container">
+      <div class="inputs-container">
+        <p>instrucciones: {{data.instructions}}</p>
+        <!-- <section> -->
+        <div class="example-button-row">
+          <button id="actionButton" mat-mini-fab matTooltip="Delete" style="background-color: rgb(145, 71, 71);"
+          (click)="deleteExercises(data)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <div class="example-button-row">
+          <button id="actionButton" mat-mini-fab matTooltip="Edit" id="save"
+          (click)="editExercise(data.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        <!-- </section> -->
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
