@@ -36,17 +36,10 @@ export class ExercisesComponent implements OnInit  {
     })
   }
 
-  deleteExercises(exercisesToDelete: Exercer) {
-    this.apiService.deleteProduct(exercisesToDelete);
+  deleteExercise(exercisesToDelete: Exercer) {
+    this.apiService.deleteExercise(exercisesToDelete);
     this.data = this.apiService.getLocalExercises();
   }
 
-  editProduct(book: any) {
-    this.apiService.navigateToProductDetail(book);
-  } 
-
-  navigateToProductDetail(data: any) {
-    this.router.navigate([`/detail/${data}`]);
-  }
 
 }

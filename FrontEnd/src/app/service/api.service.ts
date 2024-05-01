@@ -1,7 +1,8 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable,Subject } from 'rxjs';
+import { Observable,Subject,of } from 'rxjs';
 import { Exercer } from '../models/products.models';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Exercer } from '../models/products.models';
 export class ApiService {
  private urlApi = "https://exercisedb.p.rapidapi.com/exercises";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   private localStorageKey = 'data';
   private exercisesLocal: Exercer[] = [];
   private exercisesUpdated = new Subject<Exercer[]>();
@@ -41,7 +42,8 @@ export class ApiService {
     return exercisesJson ? JSON.parse(exercisesJson) : [];
   }
 
-  deleteProduct(exercisesToDelete: Exercer) {
+
+  deleteExercise(exercisesToDelete: Exercer) {
     const isConfirmed = window.confirm(`¿Está seguro de querer eliminar el ejercicio "${exercisesToDelete.name}"?`);
     if (isConfirmed) {
       const index = this.exercisesLocal.findIndex(typeExercises => typeExercises.id === exercisesToDelete.id);
@@ -50,10 +52,10 @@ export class ApiService {
         this.saveLocalExercises();
         this.exercisesUpdated.next([...this.exercisesLocal]);
       } else {
-        alert('Book not found!');
+        alert('Exercises not found!');
       }
     } else {
-      alert('Book deletion canceled!');
+      alert('Exercises deletion canceled!');
     }
   }
 
